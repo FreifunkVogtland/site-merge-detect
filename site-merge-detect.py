@@ -128,7 +128,7 @@ def main():
     meshviewer_in = sys.argv[1]
 
     # load
-    meshviewer = json.load(open(meshviewer_in))
+    meshviewer = json.load(open(meshviewer_in, encoding='utf-8'))
     whitelisted = load_whitelisted()
 
     # process
