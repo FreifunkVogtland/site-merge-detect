@@ -28,11 +28,11 @@ def get_nodes(meshviewer):
         if node_id is None:
             continue
 
-        site_code = node.get('site_code')
-        if site_code is None:
+        domain = node.get('domain')
+        if domain is None:
             continue
 
-        nodes[node_id] = site_code
+        nodes[node_id] = domain
 
     return nodes
 
@@ -47,18 +47,18 @@ def get_nodes_with_invalid_sites(nodes, whitelisted):
         if nodes[node_id] not in whitelisted:
             invalid.append({
                 'node_id': node_id,
-                'site_code': nodes[node_id],
+                'domain': nodes[node_id],
             })
 
     return invalid
 
 
 def print_invalid_site_nodes(invalid_site_nodes):
-    print("Nodes with invalid site_code found")
-    print("==================================\n")
+    print("Nodes with invalid domain found")
+    print("===============================\n")
 
     for node in invalid_site_nodes:
-        print(" * {node_id} ({site_code})".format(**node))
+        print(" * {node_id} ({domain})".format(**node))
 
     print()
 
@@ -68,27 +68,27 @@ def get_intersite_links(nodes, meshviewer):
     links = set()
 
     for link in meshviewer['links']:
-        source_site_code = nodes.get(link['source'])
-        if source_site_code is None:
+        source_domain = nodes.get(link['source'])
+        if source_domain is None:
             continue
 
-        target_site_code = nodes.get(link['target'])
-        if target_site_code is None:
+        target_domain = nodes.get(link['target'])
+        if target_domain is None:
             continue
 
-        if source_site_code == target_site_code:
+        if source_domain == target_domain:
             continue
 
         if link['source'] < link['target']:
             node_id1 = link['source']
-            site_code1 = source_site_code
+            domain1 = source_domain
             node_id2 = link['target']
-            site_code2 = target_site_code
+            domain2 = target_domain
         else:
             node_id1 = link['target']
-            site_code1 = target_site_code
+            domain1 = target_domain
             node_id2 = link['source']
-            site_code2 = source_site_code
+            domain2 = source_domain
 
         linkid = (node_id1, link['type'], node_id2)
         if linkid in links:
@@ -97,24 +97,24 @@ def get_intersite_links(nodes, meshviewer):
         links.add(linkid)
 
         intersite.append({
-            'site_code1': site_code1,
+            'domain1': domain1,
             'node_id1': node_id1,
             'type': link['type'],
             'node_id2': node_id2,
-            'site_code2': site_code2,
+            'domain2': domain2,
         })
 
     return intersite
 
 
 def print_intersite_links(intersite_links):
-    print("Links with different site_code found")
-    print("====================================\n")
+    print("Links with different domain found")
+    print("=================================\n")
 
     for link in intersite_links:
-        fmt = " * {node_id1} ({site_code1})"
+        fmt = " * {node_id1} ({domain1})"
         fmt += " <--({type})--> "
-        fmt += "{node_id2} ({site_code2})"
+        fmt += "{node_id2} ({domain2})"
         print(fmt.format(**link))
 
     print()

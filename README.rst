@@ -24,13 +24,13 @@ Both commands will be started automaticall when calling::
 
 The error log is shown as human readable text::
 
-  Nodes with invalid site_code found
-  ==================================
+  Nodes with invalid domain found
+  ===============================
   
    * ac86740037e0 (ffv_foobar)
   
-  Links with different site_code found
-  ====================================
+  Links with different domain found
+  =================================
   
    * ac867400ec00 (ffv) <--(wifi)--> f4f26dc1faea (ffv_pl)
   
