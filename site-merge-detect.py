@@ -29,7 +29,7 @@ def get_nodes(meshviewer):
             continue
 
         domain = node.get('domain')
-        if domain is None:
+        if domain is None or domain == '':
             continue
 
         nodes[node_id] = domain
