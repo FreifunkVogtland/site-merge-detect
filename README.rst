@@ -1,3 +1,6 @@
+.. SPDX-License-Identifier: CC0-1.0
+.. SPDX-FileCopyrightText: 2018-2020, Sven Eckelmann <sven@narfation.org>
+
 =================
 Site Merge Detect
 =================

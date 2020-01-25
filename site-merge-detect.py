@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8; -*-
+# SPDX-License-Identifier: MIT
+# SPDX-FileCopyrightText: 2018-2020, Sven Eckelmann <sven@narfation.org>
 
 import json
 import os
